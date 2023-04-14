@@ -14,6 +14,7 @@
   "author": "Camilo saez",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "mongoose": "^7.0.3"
