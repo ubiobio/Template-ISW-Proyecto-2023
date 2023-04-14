@@ -1,16 +1,16 @@
 'use strict';
-// Importa el mÃ³dulo 'express' para crear las rutas
+// Importa el modulo 'express' para crear las rutas
 const express = require('express');
 
 // Importa el controlador de usuarios
-const usuarioController = require('../controllers/usuario.controller.js');
+const usuarioController = require('../controllers/user.controller.js');
 
 // Crea una instancia del enrutador
 const router = express.Router();
 
 // Define las rutas para los usuarios
-router.get('/', usuarioController.getUsuarios);
-router.post('/', usuarioController.createUsuario);
+router.get('/', usuarioController.getUsers);
+router.post('/', usuarioController.createUser);
 
 // Exporta el enrutador
 module.exports = router;

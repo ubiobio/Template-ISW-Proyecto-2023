@@ -1,0 +1,25 @@
+{
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "google"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "new-cap": "off",
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always"],
+    "max-len" : ["error", {
+      "code": 100,
+      "tabWidth": 2,
+      "comments" : 150
+    }],
+    "valid-jsdoc": "off",
+    "no-console": "warn"
+  }
+}

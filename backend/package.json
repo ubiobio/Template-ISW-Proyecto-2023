@@ -17,5 +17,12 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-google": "^0.14.0",
+    "jsdoc": "^4.0.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7"
   }
 }
