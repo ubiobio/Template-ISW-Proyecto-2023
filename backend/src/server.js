@@ -46,4 +46,4 @@ async function setupAPI(){
 
 // Inicia la API
 setupAPI().then(() => console.log('=> API Iniciada exitosamente'))
-  .catch(() => console.log('Error al iniciar la API'))
+  .catch((err) => handleFatalError(err, '/server.js -> setupAPI'))
