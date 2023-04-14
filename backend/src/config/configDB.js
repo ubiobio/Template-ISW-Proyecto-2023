@@ -19,7 +19,7 @@ const options = {
 async function setupDB() {
   try {
     await mongoose.connect(DB_URL, options);
-    console.log("Conectado a la base de datos");
+    console.log("=> Conectado a la base de datos");
   } catch (err) {
     handleError(err, '/configDB.js -> setupDB')
     throw new Error(err);

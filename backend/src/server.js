@@ -6,27 +6,27 @@ const cors = require('cors');
 const express = require("express");
 // Importa el enrutador principal
 const indexRoutes = require("./routes/index.routes.js");
-// Obtiene las variables de entorno
-const { PORT,HOST } = configEnv();
+// Importa el archivo 'configDB.js' para crear la conexión a la base de datos
 const {setupDB} = require('./config/configDB.js')
-
 // Importa el handler de errores
 const {handleFatalError,handleError} = require('./utils/errorHandler.js')
 
 async function setupServer(){
   try{
+    // Obtiene las variables de entorno
+    const { PORT,HOST } = configEnv();
     // Crea una instancia de la aplicacion
-    const app = express();
+    const server = express();
     // Agrega el middleware para el manejo de datos en formato JSON
-    app.use(express.json());
+    server.use(express.json());
     // Agregamos los cors
-    app.use(cors())
+    server.use(cors())
     // Agrega el enrutador principal al servidor
-    app.use("/api", indexRoutes);
+    server.use("/api", indexRoutes);
     // Inicia el servidor web en el puerto 3000
     // La funcion de callback muestra un mensaje en la consola indicando que el servidor esta en ejecucion
-    app.listen(PORT, () => {
-      console.log(`Servidor corriendo en ${HOST}:${PORT}/api`);
+    server.listen(PORT, () => {
+      console.log(`=> Servidor corriendo en ${HOST}:${PORT}/api`);
     });
   }catch (err){
     handleError(err, '/server.js -> setupServer')
@@ -35,12 +35,15 @@ async function setupServer(){
 
 async function setupAPI(){
   try{
+    // Inicia la conexión a la base de datos
     await setupDB()
+    // Inicia el servidor web
     await setupServer()
   }catch (err){
     handleFatalError(err, '/server.js -> setupAPI')
   }
 }
 
-setupAPI().then(() => console.log('API Iniciada exitosamente'))
+// Inicia la API
+setupAPI().then(() => console.log('=> API Iniciada exitosamente'))
   .catch(() => console.log('Error al iniciar la API'))
