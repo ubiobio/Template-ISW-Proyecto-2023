@@ -1,12 +1,21 @@
 {
-  "name": "backend",
+  "name": "api-node",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API con Node",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/server.js"
   },
-  "keywords": [],
-  "author": "Camilo Saez Garrido",
-  "license": "ISC"
+  "keywords": [
+    "node",
+    "backend",
+    "http"
+  ],
+  "author": "Camilo saez",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "mongoose": "^7.0.3"
+  }
 }
