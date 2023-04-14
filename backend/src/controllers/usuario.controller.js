@@ -1,3 +1,4 @@
+'use strict';
 // Importa el modelo de datos 'Usuario'
 const Usuario = require('../models/usuario.model.js');
 

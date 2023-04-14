@@ -1,3 +1,4 @@
+'use strict';
 // Importa el mÃ³dulo 'express' para crear las rutas
 const express = require('express');
 

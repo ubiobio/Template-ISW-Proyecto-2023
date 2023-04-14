@@ -1,5 +1,5 @@
 // Importa el archivo 'configEnv.js' para cargar las variables de entorno
-const { configEnv } = require('./configEnv.js');
+const { configEnv } = require('./config/configEnv.js');
 
 // Importa el mÃÂÃÂ³dulo 'express' para crear la aplicaciÃÂÃÂ³n web
 const express = require('express');
@@ -11,7 +11,7 @@ const indexRoutes = require('./routes/index.routes.js');
 const { PORT } = configEnv();
 
 // Importa el archivo 'configDB.js' para crear la conexiÃÂÃÂ³n a la base de datos
-require('./configDB.js');
+require('./config/configDB.js');
 
 // Crea una instancia de la aplicaciÃÂÃÂ³n
 const app = express();

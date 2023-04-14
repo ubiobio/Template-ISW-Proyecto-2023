@@ -1,3 +1,4 @@
+'use strict';
 // Importa el mÃ³dulo 'mongoose' para crear la conexiÃ³n a la base de datos
 const mongoose = require('mongoose');
 
