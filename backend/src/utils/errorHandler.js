@@ -21,6 +21,7 @@ function handleFatalError(error, msg) {
 function handleError(error,msg) {
   console.log('[ERROR] A ocurrido un error en \n', msg);
   console.error(error);
+  throw new Error(error.message);
 }
 
 module.exports = {

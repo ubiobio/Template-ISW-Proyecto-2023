@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 // Crea el esquema de la coleccion 'usuarios'
 const userSchema = new mongoose.Schema({
-  nombre: {
+  name: {
     type: String,
     required: true,
   },
