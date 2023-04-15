@@ -15,7 +15,12 @@ const options = {
   useUnifiedTopology: true,
 };
 
-// Conecta a la base de datos
+/**
+ * @name setupDB
+ * @description Funcion que crea la conexion a la base de datos
+ * @returns {Promise<void>}
+ * @throws {Error}
+ */
 async function setupDB() {
   try {
     await mongoose.connect(DB_URL, options);
@@ -25,4 +30,5 @@ async function setupDB() {
     throw new Error(err);
   }
 }
+
 module.exports = { setupDB };

@@ -1,6 +1,6 @@
 // Importa el archivo 'configEnv.js' para cargar las variables de entorno
 const { configEnv } = require("./config/configEnv.js");
-//Importa el módulo 'cors' para agregar los cors
+// Importa el módulo 'cors' para agregar los cors
 const cors = require("cors");
 // Importa el módulo 'express' para crear la aplicacion web
 const express = require("express");
@@ -11,6 +11,12 @@ const { setupDB } = require("./config/configDB.js");
 // Importa el handler de errores
 const { handleFatalError, handleError } = require("./utils/errorHandler.js");
 
+/**
+ * @name setupServer
+ * @description Inicia el servidor web
+ * @returns {Promise<void>}
+ * @throws {Error}
+ */
 async function setupServer() {
   try {
     // Obtiene las variables de entorno
@@ -33,6 +39,12 @@ async function setupServer() {
   }
 }
 
+/**
+ * @name setupAPI
+ * @description Inicia la API
+ * @returns {Promise<void>}
+ * @throws {Error}
+ */
 async function setupAPI() {
   try {
     // Inicia la conexión a la base de datos
