@@ -1,26 +1,26 @@
 // Importa el archivo 'configEnv.js' para cargar las variables de entorno
 const { configEnv } = require("./config/configEnv.js");
 //Importa el módulo 'cors' para agregar los cors
-const cors = require('cors');
+const cors = require("cors");
 // Importa el módulo 'express' para crear la aplicacion web
 const express = require("express");
 // Importa el enrutador principal
 const indexRoutes = require("./routes/index.routes.js");
 // Importa el archivo 'configDB.js' para crear la conexión a la base de datos
-const {setupDB} = require('./config/configDB.js')
+const { setupDB } = require("./config/configDB.js");
 // Importa el handler de errores
-const {handleFatalError,handleError} = require('./utils/errorHandler.js')
+const { handleFatalError, handleError } = require("./utils/errorHandler.js");
 
-async function setupServer(){
-  try{
+async function setupServer() {
+  try {
     // Obtiene las variables de entorno
-    const { PORT,HOST } = configEnv();
+    const { PORT, HOST } = configEnv();
     // Crea una instancia de la aplicacion
     const server = express();
     // Agrega el middleware para el manejo de datos en formato JSON
     server.use(express.json());
     // Agregamos los cors
-    server.use(cors())
+    server.use(cors());
     // Agrega el enrutador principal al servidor
     server.use("/api", indexRoutes);
     // Inicia el servidor web en el puerto 3000
@@ -28,22 +28,23 @@ async function setupServer(){
     server.listen(PORT, () => {
       console.log(`=> Servidor corriendo en ${HOST}:${PORT}/api`);
     });
-  }catch (err){
-    handleError(err, '/server.js -> setupServer')
+  } catch (err) {
+    handleError(err, "/server.js -> setupServer");
   }
 }
 
-async function setupAPI(){
-  try{
+async function setupAPI() {
+  try {
     // Inicia la conexión a la base de datos
-    await setupDB()
+    await setupDB();
     // Inicia el servidor web
-    await setupServer()
-  }catch (err){
-    handleFatalError(err, '/server.js -> setupAPI')
+    await setupServer();
+  } catch (err) {
+    handleFatalError(err, "/server.js -> setupAPI");
   }
 }
 
 // Inicia la API
-setupAPI().then(() => console.log('=> API Iniciada exitosamente'))
-  .catch((err) => handleFatalError(err, '/server.js -> setupAPI'))
+setupAPI()
+  .then(() => console.log("=> API Iniciada exitosamente"))
+  .catch((err) => handleFatalError(err, "/server.js -> setupAPI"));

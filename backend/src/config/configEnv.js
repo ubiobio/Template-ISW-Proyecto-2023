@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 //Importa el modulo 'path' para obtener la ruta absoluta del archivo .env.example
-const path = require('path');
+const path = require("path");
 
 // Obtiene la ruta absoluta del archivo .env.example
 const configEnv = () => {
   const envFilePath = path.resolve(__dirname, `.env`);
   // Carga las variables de entorno desde el archivo .env.example
-  require('dotenv').config({ path: envFilePath });
+  require("dotenv").config({ path: envFilePath });
   // Retorna un objeto con las variables de entorno
   return {
     PORT: process.env.PORT,

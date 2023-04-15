@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 // Agregamos la configuracion de las variables de entorno
 const { configEnv } = require("./configEnv.js");
-const { handleError } = require('../utils/errorHandler');
+const { handleError } = require("../utils/errorHandler");
 
 // Obtiene las variables de entorno
 const { DB_URL } = configEnv();
@@ -21,10 +21,8 @@ async function setupDB() {
     await mongoose.connect(DB_URL, options);
     console.log("=> Conectado a la base de datos");
   } catch (err) {
-    handleError(err, '/configDB.js -> setupDB')
+    handleError(err, "/configDB.js -> setupDB");
     throw new Error(err);
   }
-
 }
 module.exports = { setupDB };
-

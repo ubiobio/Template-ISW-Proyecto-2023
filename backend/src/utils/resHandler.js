@@ -32,7 +32,7 @@ function respondError(
   type = "Internal",
   details = {
     message: "Contact admin",
-  }
+  },
 ) {
   res.status(statusCode).json({
     state: "Error",
@@ -54,7 +54,7 @@ function respondInternalError(
   req,
   res,
   statusCode = 500,
-  message = "Couldnt process the request"
+  message = "Couldnt process the request",
 ) {
   res.status(statusCode).json({
     state: "Error",

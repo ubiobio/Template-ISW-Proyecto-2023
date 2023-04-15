@@ -25,11 +25,11 @@ exports.createUser = async (req, res) => {
           400,
           "Error en la validacion de datos",
           "Bad Request",
-          { message: "Verifique los datos ingresados" }
+          { message: "Verifique los datos ingresados" },
         )
       : respondSuccess(req, res, 201, nuevoUser);
   } catch (error) {
     handleError(error, "user.controller.js -> createUser");
-    respondError(req, res, 400, error.message);
+    respondError(req, res, 500, "No se pudo crear el usuario");
   }
 };
