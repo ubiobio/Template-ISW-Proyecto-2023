@@ -48,4 +48,14 @@
 
 ![img.png](ArquitecturaApi.png)
 
+## Libreias utilizadas
+
+- [Express](https://expressjs.com/es/): Framework para crear servidores web
+- [Mongoose](https://mongoosejs.com/): Libreria para conectar a MongoDB
+- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken): Libreria para crear tokens de autenticacion
+- [Dotenv](https://www.npmjs.com/package/dotenv): Libreria para manejar variables de entorno
+- [Cors](https://www.npmjs.com/package/cors): Libreria para manejar el CORS
+- [Joi](https://www.npmjs.com/package/joi): Libreria para manejar validaciones
+
+
 ## [Volver al inicio](../README.md)
