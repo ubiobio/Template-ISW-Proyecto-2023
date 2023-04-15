@@ -50,6 +50,7 @@
 
 ## Libreias utilizadas
 
+- [Node](https://nodejs.org/es/): Entorno de ejecucion de JS
 - [Express](https://expressjs.com/es/): Framework para crear servidores web
 - [Mongoose](https://mongoosejs.com/): Libreria para conectar a MongoDB
 - [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken): Libreria para crear tokens de autenticacion
