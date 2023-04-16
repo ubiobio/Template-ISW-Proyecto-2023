@@ -10,6 +10,7 @@ const indexRoutes = require("./routes/index.routes.js");
 const { setupDB } = require("./config/configDB.js");
 // Importa el handler de errores
 const { handleFatalError, handleError } = require("./utils/errorHandler.js");
+const { createRoles, createUsers } = require("./config/initialSetup");
 
 /**
  * @name setupServer
@@ -27,6 +28,8 @@ async function setupServer() {
     server.use(express.json());
     // Agregamos los cors
     server.use(cors());
+    // Agrega el middleware para el manejo de datos en formato URL
+    server.use(express.urlencoded({ extended: false }));
     // Agrega el enrutador principal al servidor
     server.use("/api", indexRoutes);
     // Inicia el servidor web en el puerto 3000
@@ -51,6 +54,10 @@ async function setupAPI() {
     await setupDB();
     // Inicia el servidor web
     await setupServer();
+    // Inicia la creación de los roles
+    await createRoles();
+    // Inicia la creación del usuario admin y user
+    await createUsers();
   } catch (err) {
     handleFatalError(err, "/server.js -> setupAPI");
   }

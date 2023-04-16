@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  roles: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role",
+    },
+  ],
 });
 
 // Crea el modelo de datos 'User' a partir del esquema 'userSchema'

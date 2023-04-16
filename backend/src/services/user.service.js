@@ -1,6 +1,7 @@
 "use strict";
 // Importa el modelo de datos 'User'
 const User = require("../models/user.model.js");
+const Role = require("../models/role.model.js");
 const { handleError } = require("../utils/errorHandler");
 const { userBodySchema } = require("../schema/user.schema");
 
@@ -31,12 +32,19 @@ async function getUsers() {
  * @returns {Promise<User|null>}
  */
 async function createUser(user) {
+  // Esta funcion es similar al singup
   try {
     const { error } = userBodySchema.validate(user);
     if (error) return null;
+    const { name, email, roles } = user;
 
-    const { name, email } = user;
-    const newUser = new User({ name, email });
+    const userFound = await User.findOne({ email: user.email });
+    if (userFound) return null;
+
+    const rolesFound = await Role.find({ name: { $in: roles } });
+    const myRole = rolesFound.map((role) => role._id);
+
+    const newUser = new User({ name, email, roles: myRole });
     return await newUser.save();
   } catch (error) {
     handleError(error, "user.service -> createUser");

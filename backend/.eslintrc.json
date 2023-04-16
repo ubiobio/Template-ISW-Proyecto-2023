@@ -29,10 +29,7 @@
       "error",
       "always"
     ],
-    "array-bracket-spacing": [
-      "error",
-      "always"
-    ],
+    "array-bracket-spacing": "off",
     "max-len": [
       "error",
       {
