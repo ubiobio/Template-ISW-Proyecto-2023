@@ -4,6 +4,8 @@ const { configEnv } = require("./config/configEnv.js");
 const cors = require("cors");
 // Importa el módulo 'express' para crear la aplicacion web
 const express = require("express");
+// Importamos morgan para ver las peticiones que se hacen al servidor
+const morgan = require("morgan");
 // Importa el enrutador principal
 const indexRoutes = require("./routes/index.routes.js");
 // Importa el archivo 'configDB.js' para crear la conexión a la base de datos
@@ -28,6 +30,8 @@ async function setupServer() {
     server.use(express.json());
     // Agregamos los cors
     server.use(cors());
+    // Agregamos morgan para ver las peticiones que se hacen al servidor
+    server.use(morgan("dev"));
     // Agrega el middleware para el manejo de datos en formato URL
     server.use(express.urlencoded({ extended: false }));
     // Agrega el enrutador principal al servidor

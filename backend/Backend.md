@@ -76,6 +76,12 @@
   - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion
   - El token tiene una duracion de 24 horas y se llama `token`
 
+## Consideraciones
+
+- El manejo de tokens, esta simplificado para hacerlo mas facil de entender
+- **Se recomienda usar cookies para manejar los tokens**, no el body de la peticion
+- La abstracion de la autenticacion, se completará con el frontend
+
 ## Librerias utilizadas
 
 - [Node](https://nodejs.org/es/): Entorno de ejecucion de JS
@@ -85,6 +91,7 @@
 - [Dotenv](https://www.npmjs.com/package/dotenv): Libreria para manejar variables de entorno
 - [Cors](https://www.npmjs.com/package/cors): Libreria para manejar el CORS
 - [Joi](https://www.npmjs.com/package/joi): Libreria para manejar validaciones
+- [Morgan](https://www.npmjs.com/package/morgan): Libreria para manejar logs
 
 
 ## [Volver al inicio](../README.md)
