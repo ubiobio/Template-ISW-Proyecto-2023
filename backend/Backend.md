@@ -21,16 +21,24 @@
 │   ├── src
 │   │   ├── config
 │   │   │   ├── .env
+│   │   │   ├── initialSetup.js
 │   │   │   ├── configDB.js
 │   │   │   └──configEnv.js
 │   │   ├── controllers
+│   │   │   ├── auth.controller.js
 │   │   │   └── user.controller.js
+│   │   ├── middlewares
+│   │   │   ├── autho.middleware.js
+│   │   │   └── authe.middleware.js
 │   │   ├── models
-│   │   │   └── usuario.model.js
+│   │   │   ├── auth.model.js
+│   │   │   └── user.model.js
 │   │   ├── routes
+│   │   │   ├── auth.route.js
 │   │   │   └── user.route.js
 │   │   │   └── index.routes.js
 │   │   ├── services
+│   │   │   ├── auth.service.js
 │   │   │   └── user.service.js
 │   │   ├── schemas
 │   │   │   └── user.schema.js    
