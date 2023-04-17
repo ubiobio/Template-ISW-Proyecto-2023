@@ -54,7 +54,7 @@
 
 ## Arquitecura de la API
 
-![img.png](ArquitecturaApi.png)
+![img.png](ArquitecturaAPI.png)
 
 ## Libreias utilizadas
 
