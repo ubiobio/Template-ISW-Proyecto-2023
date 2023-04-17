@@ -23,7 +23,7 @@
 │   │   │   ├── .env
 │   │   │   ├── initialSetup.js
 │   │   │   ├── configDB.js
-│   │   │   └──configEnv.js
+│   │   │   └── configEnv.js
 │   │   ├── controllers
 │   │   │   ├── auth.controller.js
 │   │   │   └── user.controller.js
