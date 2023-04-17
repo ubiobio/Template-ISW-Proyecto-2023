@@ -52,11 +52,11 @@
 │   └── package.json
 ```
 
-## Arquitecura de la API
+## Arquitectura de la API
 
 ![img.png](ArquitecturaAPI.png)
 
-## Libreias utilizadas
+## Librerias utilizadas
 
 - [Node](https://nodejs.org/es/): Entorno de ejecucion de JS
 - [Express](https://expressjs.com/es/): Framework para crear servidores web
