@@ -56,6 +56,26 @@
 
 ![img.png](ArquitecturaAPI.png)
 
+## Instrucciones de uso
+
+- Una vez instaladas las dependencias y configuradas las variables de entorno, puedes correr el servidor con `npm start`
+- Recuerda que **debes utilizar** Postman o Insomnia para hacer las peticiones a la API
+- De manera automatica se creara un usuario administrador y user, con los siguientes datos:
+    - **Administrador**
+        - email: admin
+    - **User**
+        - email: user
+- Se debe autenticar con el usuario admin para poder crear nuevos usuarios
+- Para la autenticacion, se debe enviar un objeto JSON con el email al endpoint `/api/auth/signin`
+  - Ejemplo: 
+  ```json
+    {
+    "email": "admin@email.com"
+    }
+  ```
+  - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion
+  - El token tiene una duracion de 24 horas y se llama `token`
+
 ## Librerias utilizadas
 
 - [Node](https://nodejs.org/es/): Entorno de ejecucion de JS
