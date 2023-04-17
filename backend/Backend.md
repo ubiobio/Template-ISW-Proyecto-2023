@@ -49,7 +49,7 @@
 │   ├── .eslintrc.json
 │   ├── .prettierrc.json
 │   ├── .gitignore
-│   └──  package.json
+│   └── package.json
 ```
 
 ## Arquitecura de la API
