@@ -35,7 +35,7 @@
 │   │   │   └── user.model.js
 │   │   ├── routes
 │   │   │   ├── auth.route.js
-│   │   │   └── user.route.js
+│   │   │   ├── user.route.js
 │   │   │   └── index.routes.js
 │   │   ├── services
 │   │   │   ├── auth.service.js
@@ -49,7 +49,7 @@
 │   ├── .eslintrc.json
 │   ├── .prettierrc.json
 │   ├── .gitignore
-│   └── package.json
+└── └── package.json
 ```
 
 ## Arquitectura de la API
@@ -62,15 +62,15 @@
 - Recuerda que **debes utilizar** Postman o Insomnia para hacer las peticiones a la API
 - De manera automatica se creara un usuario administrador y user, con los siguientes datos:
     - **Administrador**
-        - email: admin
+        - `email: admin@email.com`
     - **User**
-        - email: user
+        - `email: user@email.com`
 - Se debe autenticar con el usuario admin para poder crear nuevos usuarios
 - Para la autenticacion, se debe enviar un objeto JSON con el email al endpoint `/api/auth/signin`
   - Ejemplo: 
   ```json
     {
-    "email": "admin@email.com"
+      "email": "admin@email.com"
     }
   ```
   - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion
