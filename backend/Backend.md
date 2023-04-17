@@ -74,7 +74,7 @@
     }
   ```
   - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion
-  - El token tiene una duracion de 24 horas y se llama `token`
+  - El token tiene una duracion de 24 horas y se llama `token` el header en cuestion.
 
 ## Consideraciones
 
