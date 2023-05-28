@@ -3,8 +3,11 @@
 ### Instrucciones de instalacion
 
 - Clonar el repositorio
-- Instalar dependencias con `npm install` ( deben posicionarse en la carpeta del proyecto )
-- Correr el servidor con `npm run dev`
+- Instalar dependencias con `npm install` (deben posicionarse en la carpeta del proyecto)
+-  Deben crear un archivo `.env` en la carpeta raiz del proyecto
+- Correr el servidor con `npm run dev` en desarrollo.
+
+- *Al Final*: Hacer la build del servidor con `npm run build` y correr con `npm run start` en producción.
 
 ### Estructura de archivos
 
