@@ -1,7 +1,13 @@
+import Logout from '@/components/Logout';
+import PrivateRoute from '@/components/PrivateRoute';
+
 export default function Home() {
   return (
-    <main>
-      <h1>Home page</h1>
-    </main>
+    <PrivateRoute>
+      <main>
+        <h1>Home page</h1>
+        <Logout />
+      </main>
+    </PrivateRoute>
   );
 }
