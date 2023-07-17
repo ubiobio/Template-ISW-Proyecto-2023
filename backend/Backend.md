@@ -20,7 +20,7 @@
 │   ├── node_modules
 │   ├── src
 │   │   ├── config
-│   │   │   ├── .env
+│   │   │   ├── .env.local
 │   │   │   ├── initialSetup.js
 │   │   │   ├── configDB.js
 │   │   │   └── configEnv.js

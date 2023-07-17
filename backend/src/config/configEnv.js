@@ -1,5 +1,5 @@
 "use strict";
-// Importa el modulo 'path' para obtener la ruta absoluta del archivo .env.example
+// Importa el modulo 'path' para obtener la ruta absoluta del archivo .env.local.example
 const path = require("path");
 
 /**
@@ -9,7 +9,7 @@ const path = require("path");
  */
 const configEnv = () => {
   const envFilePath = path.resolve(__dirname, ".env");
-  // Carga las variables de entorno desde el archivo .env.example
+  // Carga las variables de entorno desde el archivo .env.local.example
   require("dotenv").config({ path: envFilePath });
   // Retorna un objeto con las variables de entorno
   return {

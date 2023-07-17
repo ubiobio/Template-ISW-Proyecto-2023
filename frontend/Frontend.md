@@ -4,10 +4,17 @@
 
 - Clonar el repositorio
 - Instalar dependencias con `npm install` (deben posicionarse en la carpeta del proyecto)
--  Deben crear un archivo `.env` en la carpeta raiz del proyecto
+- Deben crear un archivo `.env.local` en la carpeta raiz del proyecto, siguiendo la estructura del `.env.example` aqui usan la url de su backend, un ejemplo seria:
+
+  ```
+  NEXT_PUBLIC_API_URL=http://localhost:8000/api
+  ```
+
+  - Es importante dejar la palabra api del final sin cambiar, ya que es la ruta base de la api.
+
 - Correr el servidor con `npm run dev` en desarrollo.
 
-- *Al Final*: Hacer la build del servidor con `npm run build` y correr con `npm run start` en producción.
+- _Al Final_: Hacer la build del servidor con `npm run build` y correr con `npm run start` en producción.
 
 ### Estructura de archivos
 
