@@ -1,3 +1,5 @@
+import BackHome from '@/components/BackHome';
+
 const About = () => {
   return (
     <>
@@ -7,6 +9,8 @@ const About = () => {
           Este template esta creado para ayudar a los alumnos con su proyecto de
           ISW
         </p>
+        <br />
+        <BackHome />
       </section>
     </>
   );

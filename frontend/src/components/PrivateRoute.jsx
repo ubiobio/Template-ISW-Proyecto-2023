@@ -1,19 +1,20 @@
 'use client';
-import useAuthToken from '@/hooks/useAuthToken';
+import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
 
 const PrivateRoute = ({ children }) => {
-  const authToken = useAuthToken();
+  const { token } = useAuth();
 
   // Verificar si el usuario ha iniciado sesión
-  if (!authToken) {
+  if (!token) {
     //Si no hay token, muestra un mensaje de error
     return (
       <>
         <main>
           <p>Debes iniciar sesion para ver esta pagina</p>
+          <br />
           <Link href="/signin">
-            <button>Ir al login </button>
+            <span>Ir al login </span>
           </Link>
         </main>
       </>

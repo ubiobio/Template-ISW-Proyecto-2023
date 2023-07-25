@@ -7,6 +7,7 @@ const Logout = () => {
     <button
       onClick={() => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         router.push('/signin');
       }}
     >
