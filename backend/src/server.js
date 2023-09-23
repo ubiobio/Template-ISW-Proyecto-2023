@@ -1,11 +1,13 @@
 // Importa el archivo 'configEnv.js' para cargar las variables de entorno
-const { configEnv } = require("./config/configEnv.js");
+const { PORT, HOST } = require("./config/configEnv.js");
 // Importa el módulo 'cors' para agregar los cors
 const cors = require("cors");
 // Importa el módulo 'express' para crear la aplicacion web
 const express = require("express");
 // Importamos morgan para ver las peticiones que se hacen al servidor
 const morgan = require("morgan");
+// Importa el módulo 'cookie-parser' para manejar las cookies
+const cookieParser = require("cookie-parser");
 // Importa el enrutador principal
 const indexRoutes = require("./routes/index.routes.js");
 // Importa el archivo 'configDB.js' para crear la conexión a la base de datos
@@ -22,18 +24,18 @@ const { createRoles, createUsers } = require("./config/initialSetup");
  */
 async function setupServer() {
   try {
-    // Obtiene las variables de entorno
-    const { PORT, HOST } = configEnv();
     // Crea una instancia de la aplicacion
     const server = express();
     // Agrega el middleware para el manejo de datos en formato JSON
     server.use(express.json());
     // Agregamos los cors
-    server.use(cors());
+    server.use(cors({ origin: "/" }));
+    // Agregamos el middleware para el manejo de cookies
+    server.use(cookieParser());
     // Agregamos morgan para ver las peticiones que se hacen al servidor
     server.use(morgan("dev"));
     // Agrega el middleware para el manejo de datos en formato URL
-    server.use(express.urlencoded({ extended: false }));
+    server.use(express.urlencoded({ extended: true }));
     // Agrega el enrutador principal al servidor
     server.use("/api", indexRoutes);
     // Inicia el servidor web en el puerto 3000
