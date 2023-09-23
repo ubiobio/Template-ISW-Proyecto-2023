@@ -12,8 +12,8 @@ const { handleError } = require("../utils/errorHandler");
  */
 async function getUsers(req, res) {
   try {
-    const usuarios = await UserService.getUsers();
-    if (!usuarios) return respondError(req, res, 404, "No hay usuarios");
+    const [usuarios, errorUsuarios] = await UserService.getUsers();
+    if (errorUsuarios) return respondError(req, res, 404, errorUsuarios);
 
     usuarios.length === 0
       ? respondSuccess(req, res, 204)
@@ -58,17 +58,11 @@ async function getUserById(req, res) {
     // !falta validar los datos de entrada con el schema
     const { id } = req.params;
 
-    const user = await UserService.getUserById(id);
+    const [user, errorUser] = await UserService.getUserById(id);
 
-    !user
-      ? respondError(
-          req,
-          res,
-          404,
-          "No se encontro el usuario solicitado",
-          "Verifique el id ingresado",
-        )
-      : respondSuccess(req, res, 200, user);
+    if (errorUser) return respondError(req, res, 404, errorUser);
+
+    respondSuccess(req, res, 200, user);
   } catch (error) {
     handleError(error, "user.controller -> getUserById");
     respondError(req, res, 500, "No se pudo obtener el usuario");
@@ -88,9 +82,6 @@ async function updateUser(req, res) {
     const [user, userError] = await UserService.updateUser(id, req.body);
 
     if (userError) return respondError(req, res, 400, userError);
-    if (!user) {
-      return respondError(req, res, 400, "No se actualizo el usuario");
-    }
 
     respondSuccess(req, res, 200, user);
   } catch (error) {

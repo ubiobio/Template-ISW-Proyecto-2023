@@ -1,70 +1,106 @@
+"use strict";
 // Servicio creado para manejar la autenticación de usuarios
 const User = require("../models/user.model.js");
-const Role = require("../models/role.model.js");
 
 const jwt = require("jsonwebtoken");
-const { configEnv } = require("../config/configEnv.js");
+const {
+  ACCESS_JWT_SECRET,
+  REFRESH_JWT_SECRET,
+} = require("../config/configEnv.js");
 const { handleError } = require("../utils/errorHandler");
 
-const { JWT_SECRET } = configEnv();
-
-// /**
-//  * @name signUp
-//  * @description Registra un nuevo usuario
-//  * @param user {User} - Objeto con los datos del usuario
-//  * @returns {Promise<*>}
-//  */
-// async function signUp(user) {
-//   try {
-//     const { name, email, roles } = user;
-//
-//     const newUser = new User({
-//       name,
-//       email,
-//     });
-//
-//     const userFound = await User.findOne({ email: user.email });
-//     if (userFound) return null;
-//
-//     if (roles) {
-//       const foundRoles = await Role.find({ name: { $in: roles } });
-//       newUser.roles = foundRoles.map((role) => role._id);
-//     } else {
-//       const role = await Role.findOne({ name: "user" });
-//       newUser.roles = [role._id];
-//     }
-//
-//     return await newUser.save();
-//     // Dejare esto comentado por si les sirve para el token
-//     // return jwt.sign({ id: savedUser._id }, JWT_SECRET, {
-//     //   expiresIn: 86400, // 24 horas
-//     // });
-//   } catch (error) {
-//     handleError(error, "auth.service -> signUp");
-//   }
-// }
-
 /**
- * @name signIn
+ * @name login
  * @description Inicia sesión con un usuario
  * @param user {User} - Objeto con los datos del usuario
  * @returns {Promise<null>}
  */
-async function signIn(user) {
+async function login(user) {
   try {
-    const userFound = await User.findOne({ email: user.email }).populate(
-      "roles",
-    );
-    if (!userFound) return null;
+    const { email, password } = user;
 
-    return jwt.sign({ id: userFound._id }, JWT_SECRET, {
-      expiresIn: 86400, // 24 horas
-    });
+    const userFound = await User.findOne({ email: email })
+      .populate("roles")
+      .exec();
+    if (!userFound) {
+      return [null, null, "El usuario y/o contraseña son incorrectos"];
+    }
+
+    const matchPassword = await User.comparePassword(
+      password,
+      userFound.password,
+    );
+
+    if (!matchPassword) {
+      return [null, null, "El usuario y/o contraseña son incorrectos"];
+    }
+
+    const accessToken = jwt.sign(
+      { email: userFound.email, roles: userFound.roles },
+      ACCESS_JWT_SECRET,
+      {
+        expiresIn: "15m",
+      },
+    );
+
+    const refreshToken = jwt.sign(
+      { email: userFound.email },
+      REFRESH_JWT_SECRET,
+      {
+        expiresIn: "7d", // 7 días
+      },
+    );
+
+    return [accessToken, refreshToken, null];
   } catch (error) {
     handleError(error, "auth.service -> signIn");
   }
 }
 
+/**
+ * @name refresh
+ * @description Refresca el token de acceso
+ * @param {*} req
+ * @param {*} res
+ */
+async function refresh(cookies) {
+  try {
+    if (!cookies.jwt) return [null, "No hay autorización"];
+    const refreshToken = cookies.jwt;
+
+    const accessToken = await jwt.verify(
+      refreshToken,
+      REFRESH_JWT_SECRET,
+      async (err, user) => {
+        if (err) return [null, "No hay token"];
+
+        const userFound = await User.findOne({
+          email: user.email,
+        })
+          .populate("roles")
+          .exec();
+
+        if (!userFound) return [null, "No usuario no autorizado"];
+
+        const accessToken = jwt.sign(
+          { email: userFound.email, roles: userFound.roles },
+          ACCESS_JWT_SECRET,
+          {
+            expiresIn: "15m",
+          },
+        );
+
+        return accessToken;
+      },
+    );
+
+    return [accessToken, null];
+  } catch (error) {
+    handleError(error, "auth.service -> refresh");
+  }
+}
+
 module.exports = {
-  signIn,
+  login,
+  refresh,
 };
