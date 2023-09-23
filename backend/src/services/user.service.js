@@ -18,7 +18,13 @@ const { handleError } = require("../utils/errorHandler");
  */
 async function getUsers() {
   try {
-    return await User.find().select("-password");
+    const users = await User.find()
+      .select("-password")
+      .populate("roles")
+      .exec();
+    if (!users) return [null, "No hay usuarios"];
+
+    return [users, null];
   } catch (error) {
     handleError(error, "user.service -> getUsers");
   }
@@ -63,7 +69,14 @@ async function createUser(user) {
  */
 async function getUserById(id) {
   try {
-    return await User.findById({ _id: id }).select("-password");
+    const user = await User.findById({ _id: id })
+      .select("-password")
+      .populate("roles")
+      .exec();
+
+    if (!user) return [null, "El usuario no existe"];
+
+    return [user, null];
   } catch (error) {
     handleError(error, "user.service -> getUserById");
   }
