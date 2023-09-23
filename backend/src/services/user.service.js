@@ -3,7 +3,6 @@
 const User = require("../models/user.model.js");
 const Role = require("../models/role.model.js");
 const { handleError } = require("../utils/errorHandler");
-const { userBodySchema } = require("../schema/user.schema");
 
 /**
  * @typedef User
@@ -19,7 +18,7 @@ const { userBodySchema } = require("../schema/user.schema");
  */
 async function getUsers() {
   try {
-    return await User.find();
+    return await User.find().select("-password");
   } catch (error) {
     handleError(error, "user.service -> getUsers");
   }
@@ -32,20 +31,25 @@ async function getUsers() {
  * @returns {Promise<User|null>}
  */
 async function createUser(user) {
-  // Esta funcion es similar al singup
   try {
-    const { error } = userBodySchema.validate(user);
-    if (error) return null;
-    const { name, email, roles } = user;
+    const { username, email, password, roles } = user;
 
     const userFound = await User.findOne({ email: user.email });
-    if (userFound) return null;
+    if (userFound) return [null, "El usuario ya existe"];
 
     const rolesFound = await Role.find({ name: { $in: roles } });
+    if (rolesFound.length === 0) return [null, "El rol no existe"];
     const myRole = rolesFound.map((role) => role._id);
 
-    const newUser = new User({ name, email, roles: myRole });
-    return await newUser.save();
+    const newUser = new User({
+      username,
+      email,
+      password: await User.encryptPassword(password),
+      roles: myRole,
+    });
+    await newUser.save();
+
+    return [newUser, null];
   } catch (error) {
     handleError(error, "user.service -> createUser");
   }
@@ -59,7 +63,7 @@ async function createUser(user) {
  */
 async function getUserById(id) {
   try {
-    return await User.findById({ _id: id });
+    return await User.findById({ _id: id }).select("-password");
   } catch (error) {
     handleError(error, "user.service -> getUserById");
   }
@@ -74,10 +78,37 @@ async function getUserById(id) {
  */
 async function updateUser(id, user) {
   try {
-    const { error } = userBodySchema.validate(user);
-    if (error) return null;
+    const userFound = await User.findById(id);
+    if (!userFound) return [null, "El usuario no existe"];
 
-    return await User.findByIdAndUpdate(id, user);
+    const { username, email, password, newPassword, roles } = user;
+
+    const matchPassword = await User.comparePassword(
+      password,
+      userFound.password,
+    );
+
+    if (!matchPassword) {
+      return [null, "La contraseña no coincide"];
+    }
+
+    const rolesFound = await Role.find({ name: { $in: roles } });
+    if (rolesFound.length === 0) return [null, "El rol no existe"];
+
+    const myRole = rolesFound.map((role) => role._id);
+
+    const userUpdated = await User.findByIdAndUpdate(
+      id,
+      {
+        username,
+        email,
+        password: await User.encryptPassword(newPassword || password),
+        roles: myRole,
+      },
+      { new: true },
+    );
+
+    return [userUpdated, null];
   } catch (error) {
     handleError(error, "user.service -> updateUser");
   }
