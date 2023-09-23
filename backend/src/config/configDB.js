@@ -3,11 +3,8 @@
 const mongoose = require("mongoose");
 
 // Agregamos la configuracion de las variables de entorno
-const { configEnv } = require("./configEnv.js");
+const { DB_URL } = require("./configEnv.js");
 const { handleError } = require("../utils/errorHandler");
-
-// Obtiene las variables de entorno
-const { DB_URL } = configEnv();
 
 // Opciones de configuracion para la conexion a la base de datos
 const options = {
