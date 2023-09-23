@@ -13,10 +13,13 @@ const { handleError } = require("../utils/errorHandler");
 async function getUsers(req, res) {
   try {
     const usuarios = await UserService.getUsers();
+    if (!usuarios) return respondError(req, res, 404, "No hay usuarios");
+
     usuarios.length === 0
       ? respondSuccess(req, res, 204)
       : respondSuccess(req, res, 200, usuarios);
   } catch (error) {
+    handleError(error, "user.controller -> getUsers");
     respondError(req, res, 400, error.message);
   }
 }
@@ -29,20 +32,18 @@ async function getUsers(req, res) {
  */
 async function createUser(req, res) {
   try {
-    const nuevoUser = await UserService.createUser(req.body);
-    nuevoUser === null
-      ? respondError(
-          req,
-          res,
-          400,
-          "Error en la validacion de datos",
-          "Bad Request",
-          { message: "Verifique los datos ingresados" },
-        )
-      : respondSuccess(req, res, 201, nuevoUser);
+    // !falta validar los datos de entrada con el schema
+    const [newUser, userError] = await UserService.createUser(req.body);
+
+    if (userError) return respondError(req, res, 400, userError);
+    if (!newUser) {
+      return respondError(req, res, 400, "No se creo el usuario");
+    }
+
+    respondSuccess(req, res, 201, newUser);
   } catch (error) {
     handleError(error, "user.controller -> createUser");
-    respondError(req, res, 500, "No se pudo crear el usuario");
+    respondError(req, res, 500, "No se creo el usuario");
   }
 }
 
@@ -54,17 +55,18 @@ async function createUser(req, res) {
  */
 async function getUserById(req, res) {
   try {
+    // !falta validar los datos de entrada con el schema
     const { id } = req.params;
 
     const user = await UserService.getUserById(id);
-    user === null
+
+    !user
       ? respondError(
           req,
           res,
           404,
           "No se encontro el usuario solicitado",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
+          "Verifique el id ingresado",
         )
       : respondSuccess(req, res, 200, user);
   } catch (error) {
@@ -81,18 +83,16 @@ async function getUserById(req, res) {
  */
 async function updateUser(req, res) {
   try {
+    // !falta validar los datos de entrada con el schema
     const { id } = req.params;
-    const user = await UserService.updateUser(id, req.body);
-    user === null
-      ? respondError(
-          req,
-          res,
-          404,
-          "No se encontro el usuario solicitado",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
-        )
-      : respondSuccess(req, res, 200, user);
+    const [user, userError] = await UserService.updateUser(id, req.body);
+
+    if (userError) return respondError(req, res, 400, userError);
+    if (!user) {
+      return respondError(req, res, 400, "No se actualizo el usuario");
+    }
+
+    respondSuccess(req, res, 200, user);
   } catch (error) {
     handleError(error, "user.controller -> updateUser");
     respondError(req, res, 500, "No se pudo actualizar el usuario");
@@ -107,16 +107,16 @@ async function updateUser(req, res) {
  */
 async function deleteUser(req, res) {
   try {
+    // !falta validar los datos de entrada con el schema
     const { id } = req.params;
     const user = await UserService.deleteUser(id);
-    user === null
+    !user
       ? respondError(
           req,
           res,
           404,
           "No se encontro el usuario solicitado",
-          "Not Found",
-          { message: "Verifique el id ingresado" },
+          "Verifique el id ingresado",
         )
       : respondSuccess(req, res, 200, user);
   } catch (error) {
