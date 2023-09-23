@@ -5,11 +5,12 @@ const express = require("express");
 // Importa el controlador de usuarios
 const usuarioController = require("../controllers/user.controller.js");
 // Importa el middleware de autorización
-// const authoMiddleware = require("../middlewares/autho.middleware.js");
+const authorizationMiddleware = require("../middlewares/authorization.middleware.js");
 
 // Crea una instancia del enrutador
 const router = express.Router();
 
+router.use(authorizationMiddleware.verifyToken);
 // Define las rutas para los usuarios
 router.get("/", usuarioController.getUsers);
 router.post("/", usuarioController.createUser);
