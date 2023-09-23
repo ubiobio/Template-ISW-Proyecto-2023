@@ -19,9 +19,8 @@ function handleFatalError(error, msg) {
  * @param {String} msg A simple message to give extra context for debug
  */
 function handleError(error, msg) {
-  console.log("[ERROR] A ocurrido un error en \n", msg);
-  console.error(error);
-  throw new Error(error.message);
+  console.log("❌ [ERROR] A ocurrido un error en: \n📁", msg);
+  console.error("🗯  " + error.message);
 }
 
 module.exports = {
