@@ -6,10 +6,9 @@ const { userBodySchema, userIdSchema } = require("../schema/user.schema");
 const { handleError } = require("../utils/errorHandler");
 
 /**
- * @name getUsers
- * @description Obtiene todos los usuarios
- * @param req {Request}
- * @param res {Response}
+ * Obtiene todos los usuarios
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function getUsers(req, res) {
   try {
@@ -26,10 +25,9 @@ async function getUsers(req, res) {
 }
 
 /**
- * @name createUser
- * @description Crea un nuevo usuario
- * @param req {Request}
- * @param res {Response}
+ * Crea un nuevo usuario
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function createUser(req, res) {
   try {
@@ -52,10 +50,9 @@ async function createUser(req, res) {
 }
 
 /**
- * @name getUserById
- * @description Obtiene un usuario por su id
- * @param req {Request}
- * @param res {Response}
+ * Obtiene un usuario por su id
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function getUserById(req, res) {
   try {
@@ -75,10 +72,9 @@ async function getUserById(req, res) {
 }
 
 /**
- * @name updateUser
- * @description Actualiza un usuario por su id
- * @param req {Request}
- * @param res {Response}
+ * Actualiza un usuario por su id
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function updateUser(req, res) {
   try {
@@ -101,10 +97,9 @@ async function updateUser(req, res) {
 }
 
 /**
- * @name deleteUser
- * @description Elimina un usuario por su id
- * @param req {Request}
- * @param res {Response}
+ * Elimina un usuario por su id
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function deleteUser(req, res) {
   try {

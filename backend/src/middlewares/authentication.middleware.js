@@ -4,11 +4,10 @@ const jwt = require("jsonwebtoken");
 const { ACCESS_JWT_SECRET } = require("../config/configEnv");
 const { respondError } = require("../utils/resHandler");
 /**
- * @name verifyJWT
- * @param {Object} req -  Request object
- * @param {Object} res - Response object
- * @param {Function} next - Next function
- * @throws {Error} - Error
+ * Verifica el token de acceso
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ * @param {Function} next - Función para continuar con la siguiente función
  */
 const verifyJWT = (req, res, next) => {
   try {

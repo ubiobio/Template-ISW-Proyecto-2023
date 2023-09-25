@@ -2,14 +2,17 @@
 
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const { handleError } = require("../utils/errorHandler");
+
+/** Servicios de autenticación */
 const AuthServices = require("../services/auth.service");
 const { authLoginBodySchema } = require("../schema/auth.schema");
 
 /**
- * @name login
- * @description Inicia sesión con un usuario
- * @param {Object} req -  Request object
- * @param {Object} res - Response object
+ * Inicia sesión con un usuario.
+ * @async
+ * @function login
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function login(req, res) {
   try {
@@ -38,8 +41,8 @@ async function login(req, res) {
 /**
  * @name logout
  * @description Cierra la sesión del usuario
- * @param {Object} req -  Request object
- * @param {Object} res - Response object
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  * @returns
  */
 async function logout(req, res) {
@@ -57,8 +60,8 @@ async function logout(req, res) {
 /**
  * @name refresh
  * @description Refresca el token de acceso
- * @param {Object} req -  Request object
- * @param {Object} res - Response object
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
  */
 async function refresh(req, res) {
   try {

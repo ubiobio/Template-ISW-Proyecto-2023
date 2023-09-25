@@ -1,19 +1,23 @@
 "use strict";
-// Servicio creado para manejar la autenticación de usuarios
+
+/** Modelo de datos 'User' */
 const User = require("../models/user.model.js");
 
+/** Modulo 'jsonwebtoken' para crear tokens */
 const jwt = require("jsonwebtoken");
+
 const {
   ACCESS_JWT_SECRET,
   REFRESH_JWT_SECRET,
 } = require("../config/configEnv.js");
+
 const { handleError } = require("../utils/errorHandler");
 
 /**
- * @name login
- * @description Inicia sesión con un usuario
- * @param user {User} - Objeto con los datos del usuario
- * @returns {Promise<null>}
+ * Inicia sesión con un usuario.
+ * @async
+ * @function login
+ * @param {Object} user - Objeto de usuario
  */
 async function login(user) {
   try {
@@ -39,7 +43,7 @@ async function login(user) {
       { email: userFound.email, roles: userFound.roles },
       ACCESS_JWT_SECRET,
       {
-        expiresIn: "30s",
+        expiresIn: "1d",
       },
     );
 
@@ -47,7 +51,7 @@ async function login(user) {
       { email: userFound.email },
       REFRESH_JWT_SECRET,
       {
-        expiresIn: "1m", // 7 días
+        expiresIn: "7d", // 7 días
       },
     );
 
@@ -58,10 +62,10 @@ async function login(user) {
 }
 
 /**
- * @name refresh
- * @description Refresca el token de acceso
- * @param {*} req
- * @param {*} res
+ * Refresca el token de acceso
+ * @async
+ * @function refresh
+ * @param {Object} cookies - Objeto de cookies
  */
 async function refresh(cookies) {
   try {
@@ -86,7 +90,7 @@ async function refresh(cookies) {
           { email: userFound.email, roles: userFound.roles },
           ACCESS_JWT_SECRET,
           {
-            expiresIn: "30s",
+            expiresIn: "1d",
           },
         );
 

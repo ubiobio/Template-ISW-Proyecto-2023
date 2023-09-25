@@ -1,11 +1,12 @@
 "use strict";
 /**
- * @name respondSuccess
- * @description A handler to standardize all successful responses
- * @param {Object} req The request object from the route
- * @param {Object} res The response object from the route
- * @param {Number} statusCode The status code for the operation
- * @param {Object} data The object containing the data to be delivered
+ * Envía una respuesta exitosa estandarizada.
+ * @function respondSuccess
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ * @param {Number} statusCode - Código de estado para la operación
+ * @param {Object} data - Objeto que contiene los datos a enviar
+ * @returns {JSON} - Objeto de respuesta JSON con el estado "Success" y los datos proporcionados
  */
 function respondSuccess(req, res, statusCode = 200, data = {}) {
   return res.status(statusCode).json({
@@ -15,13 +16,14 @@ function respondSuccess(req, res, statusCode = 200, data = {}) {
 }
 
 /**
- * @name respondError
- * @description A handler to standardize all failed operations
- * @param {Object} req The request object from the route
- * @param {Object} res The response object from the route
- * @param {Number} statusCode The status code for the operation
- * @param {String} message The string detailing the reason for the error
- * @param {Object} details Extra info about the error
+ * Envía una respuesta de error estandarizada.
+ * @function respondError
+ * @param {Object} req - El objeto de petición
+ * @param {Object} res - El objeto de respuesta
+ * @param {Number} statusCode - Código de estado para la operación
+ * @param {String} message - La descripción del motivo del error
+ * @param {Object} details - Información adicional sobre el error
+ * @returns {JSON} - El objeto de respuesta JSON con el estado "Error", el mensaje de error y los detalles proporcionados
  */
 function respondError(
   req,
@@ -38,12 +40,13 @@ function respondError(
 }
 
 /**
- * @name respondInteralError
- * @description A handler to standardize all failed operations qualified as Server Error
- * @param {Object} req The request object from the route
- * @param {Object} res The response object from the route
- * @param {Number} statusCode The status code for the operation
- * @param {String} message The string detailing the reason for the error
+ * Envía una respuesta de error interno estandarizada.
+ * @function respondInternalError
+ * @param {Object} req - El objeto de petición
+ * @param {Object} res - El objeto de respuesta
+ * @param {Number} statusCode - El código de estado para la operación
+ * @param {String} message - La descripción del motivo del error
+ * @returns {JSON} - El objeto de respuesta JSON con el estado "Error" y el mensaje de error proporcionados
  */
 function respondInternalError(
   req,

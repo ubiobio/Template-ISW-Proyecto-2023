@@ -2,6 +2,10 @@
 
 const Joi = require("joi");
 
+/**
+ * Esquema de validación para el cuerpo de la solicitud de inicio de sesión.
+ * @constant {Object}
+ */
 const authLoginBodySchema = Joi.object({
   email: Joi.string().email().required().messages({
     "string.empty": "El email no puede estar vacío.",

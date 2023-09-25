@@ -2,15 +2,21 @@
 // Importa el modulo 'express' para crear las rutas
 const express = require("express");
 
-// Importa el controlador de usuarios
+/** Controlador de usuarios */
 const usuarioController = require("../controllers/user.controller.js");
-// Importa el middleware de autorización
+
+/** Middlewares de autorización */
 const authorizationMiddleware = require("../middlewares/authorization.middleware.js");
+
+/** Middleware de autenticación */
 const authenticationMiddleware = require("../middlewares/authentication.middleware.js");
-// Crea una instancia del enrutador
+
+/** Instancia del enrutador */
 const router = express.Router();
 
+// Define el middleware de autenticación para todas las rutas
 router.use(authenticationMiddleware);
+
 // Define las rutas para los usuarios
 router.get("/", usuarioController.getUsers);
 router.post("/", authorizationMiddleware.isAdmin, usuarioController.createUser);

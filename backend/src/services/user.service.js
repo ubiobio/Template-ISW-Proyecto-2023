@@ -5,16 +5,8 @@ const Role = require("../models/role.model.js");
 const { handleError } = require("../utils/errorHandler");
 
 /**
- * @typedef User
- * @property {string} _id
- * @property {String} name
- * @property {String} email
- */
-
-/**
- * @name getUsers
- * @description Obtiene todos los usuarios
- * @returns {Promise<User[]|[]>}
+ * Obtiene todos los usuarios de la base de datos
+ * @returns {Promise} Promesa con el objeto de los usuarios
  */
 async function getUsers() {
   try {
@@ -31,10 +23,9 @@ async function getUsers() {
 }
 
 /**
- * @name createUser
- * @description Crea un nuevo usuario
- * @param user {User} - Objeto con los datos del usuario
- * @returns {Promise<User|null>}
+ * Crea un nuevo usuario en la base de datos
+ * @param {Object} user Objeto de usuario
+ * @returns {Promise} Promesa con el objeto de usuario creado
  */
 async function createUser(user) {
   try {
@@ -62,10 +53,9 @@ async function createUser(user) {
 }
 
 /**
- * @name getUserById
- * @description Obtiene un usuario por su id
- * @param id {string} - Id del usuario
- * @returns {Promise<User|null>}
+ * Obtiene un usuario por su id de la base de datos
+ * @param {string} Id del usuario
+ * @returns {Promise} Promesa con el objeto de usuario
  */
 async function getUserById(id) {
   try {
@@ -83,11 +73,10 @@ async function getUserById(id) {
 }
 
 /**
- * @name updateUser
- * @description Actualiza un usuario
- * @param id
- * @param user
- * @returns {Promise<User|null>}
+ * Actualiza un usuario por su id en la base de datos
+ * @param {string} id Id del usuario
+ * @param {Object} user Objeto de usuario
+ * @returns {Promise} Promesa con el objeto de usuario actualizado
  */
 async function updateUser(id, user) {
   try {
@@ -128,10 +117,9 @@ async function updateUser(id, user) {
 }
 
 /**
- * @name deleteUser
- * @description Elimina un usuario por su id
- * @param id {string} - Id del usuario
- * @returns {Promise<User|null>}
+ * Elimina un usuario por su id de la base de datos
+ * @param {string} Id del usuario
+ * @returns {Promise} Promesa con el objeto de usuario eliminado
  */
 async function deleteUser(id) {
   try {

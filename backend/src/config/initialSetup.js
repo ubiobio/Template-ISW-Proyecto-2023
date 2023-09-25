@@ -4,8 +4,9 @@ const Role = require("../models/role.model.js");
 const User = require("../models/user.model.js");
 
 /**
- * @name createRoles
- * @description Crea los roles por defecto en la base de datos
+ * Crea los roles por defecto en la base de datos.
+ * @async
+ * @function createRoles
  * @returns {Promise<void>}
  */
 async function createRoles() {
@@ -26,8 +27,9 @@ async function createRoles() {
 }
 
 /**
- * @name createUsers
- * @description Crea los usuarios por defecto en la base de datos
+ * Crea los usuarios por defecto en la base de datos.
+ * @async
+ * @function createUsers
  * @returns {Promise<void>}
  */
 async function createUsers() {

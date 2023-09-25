@@ -6,12 +6,10 @@ const { respondError } = require("../utils/resHandler.js");
 const { handleError } = require("../utils/errorHandler.js");
 
 /**
- * @name isAdmin
- * @description Comprueba si el usuario es administrador
- * @param {Object} req -  Request object
- * @param {Object} res - Response object
- * @param {Function} next - Next function
- * @throws {Error}
+ * Comprueba si el usuario es administrador
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ * @param {Function} next - Función para continuar con la siguiente función
  */
 async function isAdmin(req, res, next) {
   try {

@@ -2,10 +2,10 @@
 // Importa el modulo 'express' para crear las rutas
 const express = require("express");
 
-// Inmporta el controlador de autenticación
+/** Controlador de autenticación */
 const authController = require("../controllers/auth.controller.js");
 
-// Crea una instancia del enrutador
+/** Instancia del enrutador */
 const router = express.Router();
 
 // Define las rutas para la autenticación
