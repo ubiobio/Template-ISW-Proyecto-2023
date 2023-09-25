@@ -5,11 +5,12 @@
 - Clonar el repositorio
 - Instalar dependencias con `npm install`
 - Crear archivo `.env` con las variables de entorno, en la carpeta `/config`
-    - Sigue la estructura del archivo `.env.example`
-    - Agrega la variable `PORT` con el puerto en el que quieres que corra el servidor
-    - Agrega la variable `HOST` con la URL del servidor
-    - Agrega la variable `DB_URL` con la URI de la base de datos
-    - Agrega la variable `JWT_SECRET` con la llave secreta para el JWT
+  - Sigue la estructura del archivo `.env.example`
+  - Agrega la variable `PORT` con el puerto en el que quieres que corra el servidor
+  - Agrega la variable `HOST` con la URL del servidor
+  - Agrega la variable `DB_URL` con la URI de la base de datos
+  - Agrega la variable `ACCESS_JWT_SECRET` con la clave secreta para crear los tokens de autenticacion
+  - Agrega la variable `REFRESH_JWT_SECRET` con la clave secreta para crear los tokens de refresco
 - Correr el servidor con `npm start`
 
 ### Estructura de carpetas
@@ -20,16 +21,18 @@
 │   ├── node_modules
 │   ├── src
 │   │   ├── config
-│   │   │   ├── .env.local
+│   │   │   ├── .env.example
 │   │   │   ├── initialSetup.js
 │   │   │   ├── configDB.js
 │   │   │   └── configEnv.js
+│   │   ├── constants
+│   │   │   ├── roles.constants.js
 │   │   ├── controllers
 │   │   │   ├── auth.controller.js
 │   │   │   └── user.controller.js
 │   │   ├── middlewares
-│   │   │   ├── autho.middleware.js
-│   │   │   └── authe.middleware.js
+│   │   │   ├── authentication.middleware.js
+│   │   │   └── authorization.middleware.js
 │   │   ├── models
 │   │   │   ├── auth.model.js
 │   │   │   └── user.model.js
@@ -41,7 +44,8 @@
 │   │   │   ├── auth.service.js
 │   │   │   └── user.service.js
 │   │   ├── schemas
-│   │   │   └── user.schema.js    
+│   │   │   ├── user.schema.js
+│   │   │   └── auth.schema.js
 │   │   ├── utils
 │   │   │   ├── resHandler.js
 │   │   │   └── errorHandler.js
@@ -61,25 +65,32 @@
 - Una vez instaladas las dependencias y configuradas las variables de entorno, puedes correr el servidor con `npm start`
 - Recuerda que **debes utilizar** Postman o Insomnia para hacer las peticiones a la API
 - De manera automatica se creara un usuario administrador y user, con los siguientes datos:
-    - **Administrador**
-        - `email: admin@email.com`
-    - **User**
-        - `email: user@email.com`
-- Se debe autenticar con el usuario admin para poder crear nuevos usuarios
-- Para la autenticacion, se debe enviar un objeto JSON con el email al endpoint `/api/auth/signin`
-  - Ejemplo: 
+  - **Administrador**
+    - `email: admin@email.com`
+    - `password: admin123`
+  - **User**
+    - `email: user@email.com`
+    - `password: user123`
+- Tambien, de manera automatica se crean dos roles principales en la base de datos:
+  - `admin`
+  - `user`
+- Se debe **autenticar con el usuario admin** para poder usar el endpoint de usuarios ( Pueden modificar esto en el archivo de rutas )
+- Para la autenticacion, se debe enviar un objeto JSON con el email y constraseña al endpoint `/api/auth/login`
+  - Ejemplo:
   ```json
-    {
-      "email": "admin@email.com"
-    }
+  {
+    "email": "admin@email.com",
+    "password": "admin123"
+  }
   ```
-  - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion
-  - El token tiene una duracion de 24 horas y se llama `token` el header en cuestion.
+  - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion, con el nombre `Authorization` y el valor `Bearer <token>`
+  - El token tiene una duracion de 24 horas, despues de ese tiempo, se puede refrescar el token con el endpoint `/api/auth/refresh`
+  - El token de refresco, tiene una duracion de 7 dias, despues de ese tiempo, se debe volver a autenticar
+  
 
 ## Consideraciones
 
 - El manejo de tokens, esta simplificado para hacerlo mas facil de entender
-- **Se recomienda usar cookies para manejar los tokens**, no el body de la peticion
 - La abstracion de la autenticacion, se completará con el frontend
 
 ## Librerias utilizadas
@@ -92,6 +103,5 @@
 - [Cors](https://www.npmjs.com/package/cors): Libreria para manejar el CORS
 - [Joi](https://www.npmjs.com/package/joi): Libreria para manejar validaciones
 - [Morgan](https://www.npmjs.com/package/morgan): Libreria para manejar logs
-
 
 ## [Volver al inicio](../README.md)
