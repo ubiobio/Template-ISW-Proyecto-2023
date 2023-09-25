@@ -3,17 +3,19 @@
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const { handleError } = require("../utils/errorHandler");
 const AuthServices = require("../services/auth.service");
+const { authLoginBodySchema } = require("../schema/auth.schema");
 
 /**
  * @name login
  * @description Inicia sesión con un usuario
- * @param req {Request}
- * @param res {Response}
- * @returns {Promise<void>}
+ * @param {Object} req -  Request object
+ * @param {Object} res - Response object
  */
 async function login(req, res) {
   try {
-    // ! falta validar con schemmas
+    const { error: bodyError } = authLoginBodySchema.validate(req.body);
+    if (bodyError) return respondError(req, res, 400, bodyError.message);
+
     const [accessToken, refreshToken, errorToken] = await AuthServices.login(
       req.body,
     );
@@ -35,8 +37,8 @@ async function login(req, res) {
 /**
  * @name logout
  * @description Cierra la sesión del usuario
- * @param {*} req
- * @param {*} res
+ * @param {Object} req -  Request object
+ * @param {Object} res - Response object
  * @returns
  */
 async function logout(req, res) {
@@ -54,14 +56,14 @@ async function logout(req, res) {
 /**
  * @name refresh
  * @description Refresca el token de acceso
- * @param {*} req
- * @param {*} res
+ * @param {Object} req -  Request object
+ * @param {Object} res - Response object
  */
 async function refresh(req, res) {
   try {
     const cookies = req.cookies;
+    if (!cookies?.jwt) return respondError(req, res, 400, "No hay token");
 
-    // console.log(await AuthServices.refresh(cookies));
     const [accessToken, errorToken] = await AuthServices.refresh(cookies);
 
     if (errorToken) return respondError(req, res, 400, errorToken);
