@@ -39,7 +39,7 @@ async function login(user) {
       { email: userFound.email, roles: userFound.roles },
       ACCESS_JWT_SECRET,
       {
-        expiresIn: "1d",
+        expiresIn: "30s",
       },
     );
 
@@ -47,7 +47,7 @@ async function login(user) {
       { email: userFound.email },
       REFRESH_JWT_SECRET,
       {
-        expiresIn: "7d", // 7 días
+        expiresIn: "1m", // 7 días
       },
     );
 
@@ -72,7 +72,7 @@ async function refresh(cookies) {
       refreshToken,
       REFRESH_JWT_SECRET,
       async (err, user) => {
-        if (err) return [null, "No hay token"];
+        if (err) return [null, "La sesion a caducado, vuelva a iniciar sesion"];
 
         const userFound = await User.findOne({
           email: user.email,
@@ -86,15 +86,15 @@ async function refresh(cookies) {
           { email: userFound.email, roles: userFound.roles },
           ACCESS_JWT_SECRET,
           {
-            expiresIn: "15m",
+            expiresIn: "30s",
           },
         );
 
-        return accessToken;
+        return [accessToken, null];
       },
     );
 
-    return [accessToken, null];
+    return accessToken;
   } catch (error) {
     handleError(error, "auth.service -> refresh");
   }
