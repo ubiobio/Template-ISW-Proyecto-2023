@@ -14,6 +14,8 @@ const authLoginBodySchema = Joi.object({
     "any.required": "La contraseña es obligatoria.",
     "string.base": "La contraseña debe ser de tipo string.",
   }),
+}).messages({
+  "object.unknown": "No se permiten propiedades adicionales.",
 });
 
 module.exports = { authLoginBodySchema };

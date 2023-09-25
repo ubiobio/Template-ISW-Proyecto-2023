@@ -2,6 +2,7 @@
 
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const UserService = require("../services/user.service");
+const { userBodySchema, userIdSchema } = require("../schema/user.schema");
 const { handleError } = require("../utils/errorHandler");
 
 /**
@@ -32,8 +33,11 @@ async function getUsers(req, res) {
  */
 async function createUser(req, res) {
   try {
-    // !falta validar los datos de entrada con el schema
-    const [newUser, userError] = await UserService.createUser(req.body);
+    const { body } = req;
+    const { error: bodyError } = userBodySchema.validate(body);
+    if (bodyError) return respondError(req, res, 400, bodyError.message);
+
+    const [newUser, userError] = await UserService.createUser(body);
 
     if (userError) return respondError(req, res, 400, userError);
     if (!newUser) {
@@ -55,10 +59,11 @@ async function createUser(req, res) {
  */
 async function getUserById(req, res) {
   try {
-    // !falta validar los datos de entrada con el schema
-    const { id } = req.params;
+    const { params } = req;
+    const { error: paramsError } = userIdSchema.validate(params);
+    if (paramsError) return respondError(req, res, 400, paramsError.message);
 
-    const [user, errorUser] = await UserService.getUserById(id);
+    const [user, errorUser] = await UserService.getUserById(params.id);
 
     if (errorUser) return respondError(req, res, 404, errorUser);
 
@@ -77,9 +82,14 @@ async function getUserById(req, res) {
  */
 async function updateUser(req, res) {
   try {
-    // !falta validar los datos de entrada con el schema
-    const { id } = req.params;
-    const [user, userError] = await UserService.updateUser(id, req.body);
+    const { params, body } = req;
+    const { error: paramsError } = userIdSchema.validate(params);
+    if (paramsError) return respondError(req, res, 400, paramsError.message);
+
+    const { error: bodyError } = userBodySchema.validate(body);
+    if (bodyError) return respondError(req, res, 400, bodyError.message);
+
+    const [user, userError] = await UserService.updateUser(params.id, body);
 
     if (userError) return respondError(req, res, 400, userError);
 
@@ -98,9 +108,11 @@ async function updateUser(req, res) {
  */
 async function deleteUser(req, res) {
   try {
-    // !falta validar los datos de entrada con el schema
-    const { id } = req.params;
-    const user = await UserService.deleteUser(id);
+    const { params } = req;
+    const { error: paramsError } = userIdSchema.validate(params);
+    if (paramsError) return respondError(req, res, 400, paramsError.message);
+
+    const user = await UserService.deleteUser(params.id);
     !user
       ? respondError(
           req,

@@ -39,7 +39,7 @@ async function login(user) {
       { email: userFound.email, roles: userFound.roles },
       ACCESS_JWT_SECRET,
       {
-        expiresIn: "15m",
+        expiresIn: "1d",
       },
     );
 

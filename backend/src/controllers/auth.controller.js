@@ -13,12 +13,13 @@ const { authLoginBodySchema } = require("../schema/auth.schema");
  */
 async function login(req, res) {
   try {
-    const { error: bodyError } = authLoginBodySchema.validate(req.body);
+    const { body } = req;
+    const { error: bodyError } = authLoginBodySchema.validate(body);
     if (bodyError) return respondError(req, res, 400, bodyError.message);
 
-    const [accessToken, refreshToken, errorToken] = await AuthServices.login(
-      req.body,
-    );
+    const [accessToken, refreshToken, errorToken] =
+      await AuthServices.login(body);
+
     if (errorToken) return respondError(req, res, 400, errorToken);
 
     // * Existen mas opciones de seguirdad para las cookies *//
