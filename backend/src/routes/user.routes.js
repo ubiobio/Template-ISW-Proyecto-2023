@@ -6,17 +6,25 @@ const express = require("express");
 const usuarioController = require("../controllers/user.controller.js");
 // Importa el middleware de autorización
 const authorizationMiddleware = require("../middlewares/authorization.middleware.js");
-
+const authenticationMiddleware = require("../middlewares/authentication.middleware.js");
 // Crea una instancia del enrutador
 const router = express.Router();
 
-router.use(authorizationMiddleware.verifyToken);
+router.use(authenticationMiddleware);
 // Define las rutas para los usuarios
 router.get("/", usuarioController.getUsers);
-router.post("/", usuarioController.createUser);
+router.post("/", authorizationMiddleware.isAdmin, usuarioController.createUser);
 router.get("/:id", usuarioController.getUserById);
-router.put("/:id", usuarioController.updateUser);
-router.delete("/:id", usuarioController.deleteUser);
+router.put(
+  "/:id",
+  authorizationMiddleware.isAdmin,
+  usuarioController.updateUser,
+);
+router.delete(
+  "/:id",
+  authorizationMiddleware.isAdmin,
+  usuarioController.deleteUser,
+);
 
 // Exporta el enrutador
 module.exports = router;

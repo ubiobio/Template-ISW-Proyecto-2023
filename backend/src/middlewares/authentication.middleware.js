@@ -5,16 +5,23 @@ const { ACCESS_JWT_SECRET } = require("../config/configEnv");
 const { respondError } = require("../utils/resHandler");
 /**
  * @name verifyJWT
- * @param {*} req {Request}
- * @param {*} res {Response}
- * @param {*} next
+ * @param {Object} req -  Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next function
+ * @throws {Error} - Error
  */
 const verifyJWT = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || req.headers.Authorization;
 
     if (!authHeader?.startsWith("Bearer ")) {
-      return respondError(req, res, 401, "No autorizado", "No hay token");
+      return respondError(
+        req,
+        res,
+        401,
+        "No autorizado",
+        "No hay token valido",
+      );
     }
 
     const token = authHeader.split(" ")[1];
