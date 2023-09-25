@@ -2,14 +2,16 @@
 // Importa el modulo 'express' para crear las rutas
 const express = require("express");
 
-// Importa el enrutador de usuarios
+/** Enrutador de usuarios  */
 const userRoutes = require("./user.routes.js");
-// Importa el enrutador de autenticación
+
+/** Enrutador de autenticación */
 const authRoutes = require("./auth.routes.js");
-// Importa el middleware de autenticación
+
+/** Middleware de autenticación */
 const authenticationMiddleware = require("../middlewares/authentication.middleware.js");
 
-// Crea una instancia del enrutador
+/** Instancia del enrutador */
 const router = express.Router();
 
 // Define las rutas para los usuarios /api/usuarios

@@ -31,16 +31,18 @@ const userSchema = new mongoose.Schema(
   },
 );
 
+/** Encripta la contraseña del usuario */
 userSchema.statics.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
 
+/** Compara la contraseña del usuario */
 userSchema.statics.comparePassword = async (password, receivedPassword) => {
   return await bcrypt.compare(password, receivedPassword);
 };
 
-// Crea el modelo de datos 'User' a partir del esquema 'userSchema'
+/** Modelo de datos 'User' */
 const User = mongoose.model("User", userSchema);
 
 // Exporta el modelo de datos 'User'

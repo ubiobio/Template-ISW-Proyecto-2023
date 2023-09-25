@@ -8,7 +8,7 @@ const express = require("express");
 const morgan = require("morgan");
 // Importa el módulo 'cookie-parser' para manejar las cookies
 const cookieParser = require("cookie-parser");
-// Importa el enrutador principal
+/** El enrutador principal */
 const indexRoutes = require("./routes/index.routes.js");
 // Importa el archivo 'configDB.js' para crear la conexión a la base de datos
 const { setupDB } = require("./config/configDB.js");
@@ -17,14 +17,11 @@ const { handleFatalError, handleError } = require("./utils/errorHandler.js");
 const { createRoles, createUsers } = require("./config/initialSetup");
 
 /**
- * @name setupServer
- * @description Inicia el servidor web
- * @returns {Promise<void>}
- * @throws {Error}
+ * Inicia el servidor web
  */
 async function setupServer() {
   try {
-    // Crea una instancia de la aplicacion
+    /** Instancia de la aplicacion */
     const server = express();
     // Agrega el middleware para el manejo de datos en formato JSON
     server.use(express.json());
@@ -38,8 +35,8 @@ async function setupServer() {
     server.use(express.urlencoded({ extended: true }));
     // Agrega el enrutador principal al servidor
     server.use("/api", indexRoutes);
-    // Inicia el servidor web en el puerto 3000
-    // La funcion de callback muestra un mensaje en la consola indicando que el servidor esta en ejecucion
+
+    // Inicia el servidor en el puerto especificado
     server.listen(PORT, () => {
       console.log(`=> Servidor corriendo en ${HOST}:${PORT}/api`);
     });
@@ -49,10 +46,7 @@ async function setupServer() {
 }
 
 /**
- * @name setupAPI
- * @description Inicia la API
- * @returns {Promise<void>}
- * @throws {Error}
+ * Inicia la API
  */
 async function setupAPI() {
   try {

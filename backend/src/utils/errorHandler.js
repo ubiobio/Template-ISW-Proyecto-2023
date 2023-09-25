@@ -1,10 +1,9 @@
 "use strict";
 
 /**
- * @name handleFatalError
- * @description A simple handler for fatal errors
- * @param {Object} error The object with the error specifications
- * @param {String} msg A simple message to give extra context for debug
+ * Manejador de errores fatales
+ * @param {Object} error Objecto con las especificaciones del error
+ * @param {String} msg Mensaje para dar contexto al error
  */
 function handleFatalError(error, msg) {
   console.log("[FATAL ERROR] Apagando servidor \n", msg);
@@ -13,10 +12,9 @@ function handleFatalError(error, msg) {
 }
 
 /**
- * @name handleError
- * @description A simple handler for normal errors
- * @param {Object} error The object with the error specifications
- * @param {String} msg A simple message to give extra context for debug
+ * Manejador de errores
+ * @param {Object} error Objecto con las especificaciones del error
+ * @param {String} msg Mensaje para dar contexto al error
  */
 function handleError(error, msg) {
   console.log("❌ [ERROR] A ocurrido un error en: \n📁", msg);

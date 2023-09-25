@@ -3,6 +3,10 @@
 const Joi = require("joi");
 const ROLES = require("../constants/roles.constants");
 
+/**
+ * Esquema de validación para el cuerpo de la solicitud de usuario.
+ * @constant {Object}
+ */
 const userBodySchema = Joi.object({
   username: Joi.string().required().messages({
     "string.empty": "El nombre de usuario no puede estar vacío.",
@@ -39,6 +43,10 @@ const userBodySchema = Joi.object({
   "object.unknown": "No se permiten propiedades adicionales.",
 });
 
+/**
+ * Esquema de validación para el id de usuario.
+ * @constant {Object}
+ */
 const userIdSchema = Joi.object({
   id: Joi.string()
     .required()
