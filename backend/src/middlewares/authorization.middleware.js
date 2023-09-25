@@ -8,10 +8,9 @@ const { handleError } = require("../utils/errorHandler.js");
 /**
  * @name isAdmin
  * @description Comprueba si el usuario es administrador
- * @param req {Request}
- * @param res {Response}
- * @param next {Function}
- * @returns {Promise<void>}
+ * @param {Object} req -  Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next function
  * @throws {Error}
  */
 async function isAdmin(req, res, next) {
