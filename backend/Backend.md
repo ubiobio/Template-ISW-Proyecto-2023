@@ -86,7 +86,6 @@
   - Devuelve un token que se **debe enviar en el header** de las peticiones que requieran autenticacion, con el nombre `Authorization` y el valor `Bearer <token>`
   - El token tiene una duracion de 24 horas, despues de ese tiempo, se puede refrescar el token con el endpoint `/api/auth/refresh`
   - El token de refresco, tiene una duracion de 7 dias, despues de ese tiempo, se debe volver a autenticar
-  
 
 ## Consideraciones
 
@@ -105,3 +104,11 @@
 - [Morgan](https://www.npmjs.com/package/morgan): Libreria para manejar logs
 
 ## [Volver al inicio](../README.md)
+
+## Extra:
+
+- Para que funcione con el frontend:
+
+  - en server.js debes editar el cors y poner esta linea: `server.use(cors({ credentials: true, origin: true }));`
+
+- Solucion de error en authentication.middleware.js, agregar `const { handleError } = require("../utils/errorHandler.js");`

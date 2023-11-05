@@ -3,6 +3,8 @@
 const jwt = require("jsonwebtoken");
 const { ACCESS_JWT_SECRET } = require("../config/configEnv");
 const { respondError } = require("../utils/resHandler");
+const { handleError } = require("../utils/errorHandler.js");
+
 /**
  * Verifica el token de acceso
  * @param {Object} req - Objeto de petición
