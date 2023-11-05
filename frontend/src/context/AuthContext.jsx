@@ -10,7 +10,7 @@ export const useAuth = () => useContext(AuthContext);
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem('user')) || {};
+  const user = JSON.parse(localStorage.getItem('user')) || '';
   const isAuthenticated = user ? true : false;
 
   useEffect(() => {
