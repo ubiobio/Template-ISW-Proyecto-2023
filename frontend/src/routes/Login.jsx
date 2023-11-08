@@ -8,7 +8,7 @@ function Login() {
     return (
       <>
         <h2>Ya estas logeado!</h2>
-        <button onClick={() => navigate('/home')}>Ir a home</button>
+        <button onClick={() => navigate('/')}>Ir a home</button>
       </>
     );
   }
