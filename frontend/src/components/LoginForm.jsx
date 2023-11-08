@@ -13,7 +13,7 @@ function LoginForm() {
 
   const onSubmit = (data) => {
     login(data).then(() => {
-      navigate('/home');
+      navigate('/');
     });
   };
 
