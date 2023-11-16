@@ -15,6 +15,7 @@ export const login = async ({ email, password }) => {
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${data.data.accessToken}`;
+      cookies.set('jwt-auth', data.data.accessToken, { path: '/' });
     }
   } catch (error) {
     console.log(error);
