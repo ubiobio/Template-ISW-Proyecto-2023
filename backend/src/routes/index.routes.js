@@ -21,7 +21,7 @@ router.use("/users", authenticationMiddleware, userRoutes);
 // Define las rutas para la autenticación /api/auth
 router.use("/auth", authRoutes);
 
-router.use("/products", authenticationMiddleware, productRoutes);
+router.use("/products", productRoutes);
 
 // Exporta el enrutador
 module.exports = router;

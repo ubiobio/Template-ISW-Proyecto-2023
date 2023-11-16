@@ -12,6 +12,7 @@ const { handleError } = require("../utils/errorHandler");
  */
 async function getUsers(req, res) {
   try {
+    console.log({ get: req.headers });
     const [usuarios, errorUsuarios] = await UserService.getUsers();
     if (errorUsuarios) return respondError(req, res, 404, errorUsuarios);
 
@@ -31,6 +32,7 @@ async function getUsers(req, res) {
  */
 async function createUser(req, res) {
   try {
+    console.log({ create: req.headers });
     const { body } = req;
     const { error: bodyError } = userBodySchema.validate(body);
     if (bodyError) return respondError(req, res, 400, bodyError.message);
