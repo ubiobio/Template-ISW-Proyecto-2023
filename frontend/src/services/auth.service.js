@@ -26,6 +26,7 @@ export const logout = () => {
   localStorage.removeItem('user');
   delete axios.defaults.headers.common['Authorization'];
   cookies.remove('jwt');
+  cookies.remove('jwt-auth');
 };
 
 export const test = async () => {
