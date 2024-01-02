@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet as Children } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../services/auth.service';
 import { AuthProvider, useAuth } from '../context/AuthContext';
@@ -21,20 +21,26 @@ function PageRoot() {
 
   const { user } = useAuth();
 
+  const isAdmin = user.roles[0].name === 'admin';
+
   return (
     <div>
       <div>
-        <button
-          style={{ marginRight: '5px' }}
-          onClick={() => navigate('/products')}
-        >
-          Ver productos
-        </button>
+        {isAdmin ? (
+          <button
+            style={{ marginRight: '5px' }}
+            onClick={() => navigate('/products')}
+          >
+            Ver productos
+          </button>
+        ) : (
+          <span> Esto solo lo ve un admin</span>
+        )}
         <button onClick={() => navigate('/')}>Home</button>
         <p>Estas logeado como: {user.email}</p>
         <button onClick={handleLogout}>Cerrar sesion</button>
       </div>
-      <Outlet />
+      <Children />
     </div>
   );
 }

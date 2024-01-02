@@ -10,6 +10,7 @@ const { handleError } = require("../utils/errorHandler");
  * @param {Object} res - Objeto de respuesta
  */
 async function getProducts(req, res) {
+  console.log({ getProducts: req.headers });
   try {
     const [products, errorProducts] = await ProductService.getProducts();
     if (errorProducts) return respondError(req, res, 404, errorProducts);
@@ -30,6 +31,7 @@ async function getProducts(req, res) {
  */
 async function createProduct(req, res) {
   try {
+    console.log({ createProduct: req.headers });
     const { body } = req;
     const [newProduct, productError] = await ProductService.createProduct(body);
 

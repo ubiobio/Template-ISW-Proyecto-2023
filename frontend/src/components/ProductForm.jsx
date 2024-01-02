@@ -1,51 +1,52 @@
 import { useForm } from 'react-hook-form';
-import { createProduct } from '../services/products.service';
+import { createProduct } from '../services/product.service';
+import { useNavigate } from 'react-router-dom';
 
-const ProductForm = () => {
+export default function ProductForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => await createProduct(data);
+  const router = useNavigate();
+  const mostrarPorConsola = async (data) => {
+    const res = await createProduct(data);
+    console.log(res);
+    router('/products');
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(mostrarPorConsola)}>
       <div>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          autoComplete="off"
-          {...register('name', { required: true })}
-        />
-        <p>{errors.name?.message}</p>
+        <label htmlFor="name">Nombre</label>
+        <input autoComplete="off" {...register('name', { required: true })} />
       </div>
       <div>
-        <label htmlFor="price">Price</label>
+        <label htmlFor="price">Precio</label>
         <input
           type="number"
-          name="price"
-          id="price"
           autoComplete="off"
-          {...register('price', { required: true, valueAsNumber: true })}
+          {...register('price', {
+            required: true,
+            valueAsNumber: true,
+            min: 0,
+          })}
         />
       </div>
       <div>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Descripción</label>
         <input
-          type="text"
-          name="description"
-          id="description"
           autoComplete="off"
           {...register('description', { required: true })}
         />
       </div>
+      {errors.exampleRequired && <span>Este campo es obligario</span>}
+
       <input type="submit" />
+      <button type="button" onClick={() => router('/products')}>
+        Cancelar
+      </button>
     </form>
   );
-};
-
-export default ProductForm;
+}

@@ -10,7 +10,7 @@ const authenticationMiddleware = require("../middlewares/authentication.middlewa
 
 const router = express.Router();
 
-// router.use(authenticationMiddleware);
+router.use(authenticationMiddleware);
 
 router.get("/", productController.getProducts);
 router.post("/", productController.createProduct);
