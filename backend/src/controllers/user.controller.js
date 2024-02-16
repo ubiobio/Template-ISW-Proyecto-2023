@@ -1,9 +1,9 @@
 "use strict";
 
-const { respondSuccess, respondError } = require("../utils/resHandler");
-const UserService = require("../services/user.service");
-const { userBodySchema, userIdSchema } = require("../schema/user.schema");
-const { handleError } = require("../utils/errorHandler");
+import { respondSuccess, respondError } from "../utils/resHandler.js";
+import UserService from "../services/user.service.js";
+import { userBodySchema, userIdSchema } from "../schema/user.schema.js";
+import { handleError } from "../utils/errorHandler.js";
 
 /**
  * Obtiene todos los usuarios
@@ -123,7 +123,7 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = {
+export default {
   getUsers,
   createUser,
   getUserById,

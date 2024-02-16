@@ -1,18 +1,18 @@
 "use strict";
 // Importa el modulo 'express' para crear las rutas
-const express = require("express");
+import { Router } from "express";
 
 /** Enrutador de usuarios  */
-const userRoutes = require("./user.routes.js");
+import userRoutes from "./user.routes.js";
 
 /** Enrutador de autenticación */
-const authRoutes = require("./auth.routes.js");
+import authRoutes from "./auth.routes.js";
 
 /** Middleware de autenticación */
-const authenticationMiddleware = require("../middlewares/authentication.middleware.js");
+import authenticationMiddleware from "../middlewares/authentication.middleware.js";
 
 /** Instancia del enrutador */
-const router = express.Router();
+const router = Router();
 
 // Define las rutas para los usuarios /api/usuarios
 router.use("/users", authenticationMiddleware, userRoutes);
@@ -20,4 +20,4 @@ router.use("/users", authenticationMiddleware, userRoutes);
 router.use("/auth", authRoutes);
 
 // Exporta el enrutador
-module.exports = router;
+export default router;

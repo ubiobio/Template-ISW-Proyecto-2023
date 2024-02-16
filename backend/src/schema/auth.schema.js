@@ -1,6 +1,6 @@
 "use strict";
 
-const Joi = require("joi");
+import Joi from "joi";
 
 /**
  * Esquema de validación para el cuerpo de la solicitud de inicio de sesión.
@@ -22,4 +22,4 @@ const authLoginBodySchema = Joi.object({
   "object.unknown": "No se permiten propiedades adicionales.",
 });
 
-module.exports = { authLoginBodySchema };
+export { authLoginBodySchema };

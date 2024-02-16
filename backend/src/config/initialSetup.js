@@ -1,7 +1,7 @@
 "use strict";
 // Importa el modelo de datos 'Role'
-const Role = require("../models/role.model.js");
-const User = require("../models/user.model.js");
+import Role from "../models/role.model.js";
+import User from "../models/user.model.js";
 
 /**
  * Crea los roles por defecto en la base de datos.
@@ -60,7 +60,4 @@ async function createUsers() {
   }
 }
 
-module.exports = {
-  createRoles,
-  createUsers,
-};
+export { createRoles, createUsers };

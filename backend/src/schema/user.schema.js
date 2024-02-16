@@ -1,8 +1,7 @@
 "use strict";
 
-const Joi = require("joi");
-const ROLES = require("../constants/roles.constants");
-
+import Joi from "joi";
+import ROLES from "../constants/roles.constants.js";
 /**
  * Esquema de validación para el cuerpo de la solicitud de usuario.
  * @constant {Object}
@@ -59,4 +58,4 @@ const userIdSchema = Joi.object({
     }),
 });
 
-module.exports = { userBodySchema, userIdSchema };
+export { userBodySchema, userIdSchema };

@@ -1,17 +1,13 @@
 "use strict";
 
 /** Modelo de datos 'User' */
-const User = require("../models/user.model.js");
-
+import User from "../models/user.model.js";
 /** Modulo 'jsonwebtoken' para crear tokens */
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-const {
-  ACCESS_JWT_SECRET,
-  REFRESH_JWT_SECRET,
-} = require("../config/configEnv.js");
+import { ACCESS_JWT_SECRET, REFRESH_JWT_SECRET } from "../config/configEnv.js";
 
-const { handleError } = require("../utils/errorHandler");
+import { handleError } from "../utils/errorHandler.js";
 
 /**
  * Inicia sesión con un usuario.
@@ -78,7 +74,7 @@ async function refresh(cookies) {
       async (err, user) => {
         if (err) return [null, "La sesion a caducado, vuelva a iniciar sesion"];
 
-        const userFound = await User.findOne({
+        const userFound = await findOne({
           email: user.email,
         })
           .populate("roles")
@@ -104,7 +100,4 @@ async function refresh(cookies) {
   }
 }
 
-module.exports = {
-  login,
-  refresh,
-};
+export default { login, refresh };

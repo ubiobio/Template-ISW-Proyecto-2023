@@ -1,20 +1,20 @@
 // Importa el archivo 'configEnv.js' para cargar las variables de entorno
-const { PORT, HOST } = require("./config/configEnv.js");
+import { PORT, HOST } from "./config/configEnv.js";
 // Importa el módulo 'cors' para agregar los cors
-const cors = require("cors");
+import cors from "cors";
 // Importa el módulo 'express' para crear la aplicacion web
-const express = require("express");
+import express, { urlencoded, json } from "express";
 // Importamos morgan para ver las peticiones que se hacen al servidor
-const morgan = require("morgan");
+import morgan from "morgan";
 // Importa el módulo 'cookie-parser' para manejar las cookies
-const cookieParser = require("cookie-parser");
+import cookieParser from "cookie-parser";
 /** El enrutador principal */
-const indexRoutes = require("./routes/index.routes.js");
+import indexRoutes from "./routes/index.routes.js";
 // Importa el archivo 'configDB.js' para crear la conexión a la base de datos
-const { setupDB } = require("./config/configDB.js");
+import { setupDB } from "./config/configDB.js";
 // Importa el handler de errores
-const { handleFatalError, handleError } = require("./utils/errorHandler.js");
-const { createRoles, createUsers } = require("./config/initialSetup");
+import { handleFatalError, handleError } from "./utils/errorHandler.js";
+import { createRoles, createUsers } from "./config/initialSetup.js";
 
 /**
  * Inicia el servidor web
@@ -27,9 +27,9 @@ async function setupServer() {
     // Agregamos los cors
     server.use(cors({ credentials: true, origin: true }));
     // Agrega el middleware para el manejo de datos en formato URL
-    server.use(express.urlencoded({ extended: true }));
+    server.use(urlencoded({ extended: true }));
     // Agrega el middleware para el manejo de datos en formato JSON
-    server.use(express.json());
+    server.use(json());
     // Agregamos el middleware para el manejo de cookies
     server.use(cookieParser());
     // Agregamos morgan para ver las peticiones que se hacen al servidor

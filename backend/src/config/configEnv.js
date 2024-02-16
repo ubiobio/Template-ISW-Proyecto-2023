@@ -1,21 +1,21 @@
 "use strict";
-// Importa el modulo 'path' para obtener la ruta absoluta del archivo .env
-const path = require("node:path");
+// Import the 'path' module to get the absolute path of the .env file
+import path from "node:path";
+const __dirname = import.meta.dirname;
 
-/**  Obtiene la ruta absoluta del archivo .env. */
+/** Get the absolute path of the .env file. */
 const envFilePath = path.resolve(__dirname, ".env");
-// Carga las variables de entorno desde el archivo .env
-require("dotenv").config({ path: envFilePath });
+// Load environment variables from the .env file
+import dotenv from "dotenv";
+dotenv.config({ path: envFilePath });
 
-/** Puerto del servidor */
-const PORT = process.env.PORT;
-/** Host del servidor */
-const HOST = process.env.HOST;
-/** URL de la base de datos */
-const DB_URL = process.env.DB_URL;
-/** Secreto para el token de acceso */
-const ACCESS_JWT_SECRET = process.env.ACCESS_JWT_SECRET;
-/** Secreto para el token de refresco */
-const REFRESH_JWT_SECRET = process.env.REFRESH_JWT_SECRET;
-
-module.exports = { PORT, HOST, DB_URL, ACCESS_JWT_SECRET, REFRESH_JWT_SECRET };
+/** Server port */
+export const PORT = process.env.PORT;
+/** Server host */
+export const HOST = process.env.HOST;
+/** Database URL */
+export const DB_URL = process.env.DB_URL;
+/** Access token secret */
+export const ACCESS_JWT_SECRET = process.env.ACCESS_JWT_SECRET;
+/** Refresh token secret */
+export const REFRESH_JWT_SECRET = process.env.REFRESH_JWT_SECRET;

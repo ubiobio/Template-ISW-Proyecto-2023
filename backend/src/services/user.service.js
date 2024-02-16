@@ -1,8 +1,8 @@
 "use strict";
 // Importa el modelo de datos 'User'
-const User = require("../models/user.model.js");
-const Role = require("../models/role.model.js");
-const { handleError } = require("../utils/errorHandler");
+import User from "../models/user.model.js";
+import Role from "../models/role.model.js";
+import { handleError } from "../utils/errorHandler.js";
 
 /**
  * Obtiene todos los usuarios de la base de datos
@@ -129,7 +129,7 @@ async function deleteUser(id) {
   }
 }
 
-module.exports = {
+export default {
   getUsers,
   createUser,
   getUserById,

@@ -1,9 +1,9 @@
 "use strict";
 // Autorizacion - Comprobar el rol del usuario
-const User = require("../models/user.model.js");
-const Role = require("../models/role.model.js");
-const { respondError } = require("../utils/resHandler.js");
-const { handleError } = require("../utils/errorHandler.js");
+import User from "../models/user.model.js";
+import Role from "../models/role.model.js";
+import { respondError } from "../utils/resHandler.js";
+import { handleError } from "../utils/errorHandler.js";
 
 /**
  * Comprueba si el usuario es administrador
@@ -32,6 +32,4 @@ async function isAdmin(req, res, next) {
   }
 }
 
-module.exports = {
-  isAdmin,
-};
+export { isAdmin };

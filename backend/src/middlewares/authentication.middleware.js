@@ -1,9 +1,9 @@
 "use strict";
 
-const jwt = require("jsonwebtoken");
-const { ACCESS_JWT_SECRET } = require("../config/configEnv");
-const { respondError } = require("../utils/resHandler");
-const { handleError } = require("../utils/errorHandler.js");
+import jwt from "jsonwebtoken";
+import { ACCESS_JWT_SECRET } from "../config/configEnv.js";
+import { respondError } from "../utils/resHandler.js";
+import { handleError } from "../utils/errorHandler.js";
 
 /**
  * Verifica el token de acceso
@@ -38,4 +38,4 @@ const verifyJWT = (req, res, next) => {
   }
 };
 
-module.exports = verifyJWT;
+export default verifyJWT;
