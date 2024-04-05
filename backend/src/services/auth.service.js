@@ -74,7 +74,7 @@ async function refresh(cookies) {
       async (err, user) => {
         if (err) return [null, "La sesion a caducado, vuelva a iniciar sesion"];
 
-        const userFound = await findOne({
+        const userFound = await User.findOne({
           email: user.email,
         })
           .populate("roles")
