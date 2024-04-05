@@ -11,7 +11,7 @@
   - Agrega la variable `DB_URL` con la URI de la base de datos
   - Agrega la variable `ACCESS_JWT_SECRET` con la clave secreta para crear los tokens de autenticacion
   - Agrega la variable `REFRESH_JWT_SECRET` con la clave secreta para crear los tokens de refresco
-- Correr el servidor con `npm start`
+- Correr el servidor con `npm start` o `npm run dev`.
 
 ### Estructura de carpetas
 
@@ -103,12 +103,5 @@
 - [Joi](https://www.npmjs.com/package/joi): Libreria para manejar validaciones
 - [Morgan](https://www.npmjs.com/package/morgan): Libreria para manejar logs
 
-## [Volver al inicio](../README.md)
+ [Volver al inicio](../README.md)
 
-## Extra:
-
-- Para que funcione con el frontend:
-
-  - en server.js debes editar el cors y poner esta linea: `server.use(cors({ credentials: true, origin: true }));`
-
-- Solucion de error en authentication.middleware.js, agregar `const { handleError } = require("../utils/errorHandler.js");`
