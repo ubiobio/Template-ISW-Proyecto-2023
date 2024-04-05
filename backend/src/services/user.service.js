@@ -84,7 +84,7 @@ async function updateUser(id, user) {
     const userFound = await User.findById(id);
     if (!userFound) return [null, "El usuario no existe"];
 
-    const { username, email, password, newPassword, roles } = user;
+    const { username, email, rut, password, newPassword, roles } = user;
 
     const matchPassword = await User.comparePassword(
       password,
@@ -105,6 +105,7 @@ async function updateUser(id, user) {
       {
         username,
         email,
+        rut,
         password: await User.encryptPassword(newPassword || password),
         roles: myRole,
       },
